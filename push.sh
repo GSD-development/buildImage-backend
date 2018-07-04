@@ -15,3 +15,7 @@ if [ -z "$VERSION"  ]; then echo "I need the version of the container you want m
 # This assumes you have already logged in...
 #
 docker push "$CONTAINER_NAME"
+
+# now also tag it as latest
+docker push "$CONTAINER_NAME_LATEST"
+
