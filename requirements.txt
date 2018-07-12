@@ -38,7 +38,9 @@ pyxdg==0.25
 PyYAML==3.12
 rsa==3.4.2
 requests==2.19.1
+selenium==3.13.0
 template-remover==0.1.9
+toml==0.9.4
 urllib3==1.23
 yarg==0.1.9
 s3transfer==0.1.13

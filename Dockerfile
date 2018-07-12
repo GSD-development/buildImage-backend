@@ -8,6 +8,9 @@ RUN apt install -y \
     make    \
     curl    \
     jq      \
+    unzip   \
+    chromium-bsu \
+    chromium-chromedriver \
     python3 \
     python3-pip
 
@@ -18,11 +21,10 @@ RUN  update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 RUN npm install sass-loader node-sass webpack -g
 
 
-RUN echo "alias python=python3" > /etc/profile
+RUN echo "alias python=python3" >> /etc/profile
 RUN ln -s /usr/bin/pip3 /usr/bin/pip
-
+RUN echo "PATH=\$PATH:/usr/lib/chromium-browser/" >> /etc/profile
 
 ADD requirements.txt /app/
-WORKDIR /app/
-
+WORKDIR /app
 RUN pip3 install -r requirements.txt
