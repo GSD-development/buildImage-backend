@@ -37,8 +37,13 @@ RUN npm install \
 # add the npm stuff to the path
 #ENV PATH "RPATH:/root/.npm"
 
-#RUN echo "alias python=python3" >> /etc/profile
+# This build image is also used for development.  We
+# expose port 8000 for the http server for test development
+EXPOSE 8000
 
+
+#RUN echo "alias python=python3" >> /etc/profile
+RUN ln -s /usr/bin/pip3 /usr/bin/pip
 ADD requirements.txt /app/
 WORKDIR /app
 RUN pip3 install -r requirements.txt
