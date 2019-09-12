@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:bionic
 
 RUN apt update
 RUN apt install -y \
@@ -9,21 +9,35 @@ RUN apt install -y \
     curl    \
     jq      \
     unzip   \
-    chromium-bsu \
-    chromium-chromedriver \
     python3 \
     python3-pip
 
 # Install and default to python3
-RUN  update-alternatives --remove python /usr/bin/python2
-RUN  update-alternatives --install /usr/bin/python python /usr/bin/python3 1
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.6 3
+RUN update-alternatives --set python /usr/bin/python3.6
 
-RUN npm install sass-loader node-sass webpack -g
 
+WORKDIR /app
 
-RUN echo "alias python=python3" >> /etc/profile
-RUN ln -s /usr/bin/pip3 /usr/bin/pip
-RUN echo "PATH=\$PATH:/usr/lib/chromium-browser/" >> /etc/profile
+RUN npm install \
+    npm         \
+    node-sass   \
+    webpack     \
+    eslint      \
+    http-server \
+    chokidar    \
+    chokidar-cli \
+    jshint        \
+    autoprefixer \
+    serverless@1.49.0 \
+    -g --allow-root --unsafe-perm --no-optional
+
+#    sass-loader \
+# add the npm stuff to the path
+#ENV PATH "RPATH:/root/.npm"
+
+#RUN echo "alias python=python3" >> /etc/profile
 
 ADD requirements.txt /app/
 WORKDIR /app
