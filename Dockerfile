@@ -31,6 +31,7 @@ RUN npm install \
     jshint        \
     autoprefixer \
     serverless@1.49.0 \
+    pugify@2.2.0   \
     -g --allow-root --unsafe-perm --no-optional
 
 #    sass-loader \
